@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.InputSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpForce;
     private bool _isGrounded;
     private LayerMask _groundLayerMask;
+    public float vertical;
     private void Awake()
     {
         _defaultPlayerActions = new DefaultInputActions();
@@ -53,19 +55,18 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Debug.Log(IsGrounded());
         IsGrounded();
-        Vector2 inputVector = _moveAction.ReadValue<Vector2>();
-        inputVector = inputVector.normalized;
-        Vector3 moveDir = new Vector3(inputVector.x, inputVector.y);
-        float moveDistance = _movementSpeed * Time.deltaTime;
-        transform.position += moveDir * moveDistance;
-
-
-
-
+        Movement();
 
         Vector2 lookDir = _lookAction.ReadValue<Vector2>();
+    }
+    private void Movement()
+    {
+        Vector2 inputVector = _moveAction.ReadValue<Vector2>();
+        inputVector = inputVector.normalized;
+        Vector3 moveDir = new Vector3(inputVector.x, 0f);
+        float moveDistance = _movementSpeed * Time.deltaTime;
+        transform.position += moveDir * moveDistance;
     }
     public bool IsGrounded()
     {
@@ -78,5 +79,30 @@ public class PlayerController : MonoBehaviour
         else { rayColor = Color.red; }
         Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.min, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f), rayColor);
         return raycastHit.collider != null;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.transform.name == "LadderVisual")
+        {
+            // _rigidbody.velocity = Vector3.zero;
+            Debug.Log("sdfsd");
+            if (Input.GetKey(KeyCode.W))
+            {
+                Vector3 vec2 = new Vector3(0f, _movementSpeed);
+                transform.position += vec2 * Time.deltaTime;
+                //_rigidbody.gravityScale = 0f;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                Vector3 vec2 = new Vector3(0f, -_movementSpeed);
+                transform.position += vec2 * Time.deltaTime;
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.name=="LadderVisual") {
+            Debug.Log("AAAAAAAAAAAAA");
+        }
     }
 }
