@@ -22,7 +22,7 @@ public class Ladder : MonoBehaviour
         if (collision.transform.name == "Capsule")
         {
             collision.GetComponent<Rigidbody2D>().gravityScale = 0;
-            //collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

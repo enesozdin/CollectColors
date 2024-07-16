@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 vec2 = new Vector3(0f, _movementSpeed);
                 transform.position += vec2 * Time.deltaTime;
-                //_rigidbody.gravityScale = 0f;
             }
             if (Input.GetKey(KeyCode.S))
             {
@@ -101,7 +100,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.name=="LadderVisual") {
+        if (collision.transform.name == "LadderVisual")
+        {
             Debug.Log("AAAAAAAAAAAAA");
         }
     }
