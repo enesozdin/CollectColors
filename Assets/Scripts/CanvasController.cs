@@ -86,12 +86,6 @@ public class CanvasController : MonoBehaviour
         }
 
     }
-    public void AddPoint()
-    {
-        counter++;
-        point = counter / 2;
-        text.text = point.ToString();
-    }
     public void SameColor()
     {
         if (Spawner.Instance.barrel.gameObject.IsDestroyed())

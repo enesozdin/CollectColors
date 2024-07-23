@@ -45,10 +45,7 @@ public class Barrel : MonoBehaviour
     {
         if (collision.transform.name == "Capsule")
         {
-
             Destroy(gameObject);
-            CanvasController.Instance.AddPoint();
-
             if (GetComponent<SpriteRenderer>().material.color != Color.white)
             {
                 CanvasController.Instance.AddTime();
