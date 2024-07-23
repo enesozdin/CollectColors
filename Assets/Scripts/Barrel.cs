@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
@@ -19,9 +20,12 @@ public class Barrel : MonoBehaviour
 
         //spriteRenderer = GetComponent<SpriteRenderer>();
         // spriteRenderer.color = CanvasController.Instance.sameColor();
-        if (GetComponent<SpriteRenderer>().material.color == Color.white)
+        if (GetComponent<SpriteRenderer>().color == Color.white)
         {
             spriteRenderer.color = GameController.Instance.SetColor();
+            Spawner.Instance.barrel.GetComponent<SpriteRenderer>().color = Color.white;
+            Spawner.Instance.barrel1.GetComponent<SpriteRenderer>().color = Color.white;
+            Spawner.Instance.barrel2.GetComponent<SpriteRenderer>().color = Color.white;
         }
         else
         {
@@ -51,5 +55,6 @@ public class Barrel : MonoBehaviour
             }
 
         }
+
     }
 }

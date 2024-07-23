@@ -19,14 +19,10 @@ public class Spawner : MonoBehaviour
         //barrel.GetComponent<SpriteRenderer>().color = Color.white;
         //barrel1.GetComponent<SpriteRenderer>().color = Color.white;
         //barrel2.GetComponent<SpriteRenderer>().color = Color.white;
+
     }
     void Start()
     {
-        barrel.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image.color;
-        barrel1.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image1.color;
-        barrel2.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image2.color;
-
-
 
         SelectPlatform();
         for (int i = 0; i < spawnBarrelCount; i++)
@@ -73,5 +69,11 @@ public class Spawner : MonoBehaviour
         Vector2 rand = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
         //Vector2[] spawnPositions = { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7 };
         return rand;
+    }
+    public void setBarrelColor()
+    {
+        barrel.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image.color;
+        barrel1.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image1.color;
+        barrel2.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image2.color;
     }
 }

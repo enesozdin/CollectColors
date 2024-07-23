@@ -70,14 +70,14 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.min, Vector2.down, GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f, _groundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down, GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f, _groundLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)
         {
             rayColor = Color.green;
         }
         else { rayColor = Color.red; }
-        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.min, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f), rayColor);
+        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f), rayColor);
         return raycastHit.collider != null;
     }
     private void OnTriggerStay2D(Collider2D collision)

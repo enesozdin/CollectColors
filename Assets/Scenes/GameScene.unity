@@ -1729,6 +1729,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1099427508}
+  bar: 0
+  bar1: 0
+  bar2: 0
   text: {fileID: 2120330189}
   image: {fileID: 2139808018}
   image1: {fileID: 135295820}

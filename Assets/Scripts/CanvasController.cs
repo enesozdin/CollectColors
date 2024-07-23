@@ -16,9 +16,9 @@ public class CanvasController : MonoBehaviour
     private int point;
     public Slider slider;
 
-    bool bar = false;
-    bool bar1 = false;
-    bool bar2 = false;
+    public bool bar = false;
+    public bool bar1 = false;
+    public bool bar2 = false;
 
     Color lastcolor;
 
@@ -36,12 +36,14 @@ public class CanvasController : MonoBehaviour
     {
         Instance = this;
 
-        image.color = GameController.Instance.SetColor();
-        image1.color = GameController.Instance.SetColor();
-        image2.color = GameController.Instance.SetColor();
+
     }
     void Start()
     {
+        image.color = GameController.Instance.SetColor();
+        image1.color = GameController.Instance.SetColor();
+        image2.color = GameController.Instance.SetColor();
+        Spawner.Instance.setBarrelColor();
         image.transform.GetChild(0).gameObject.SetActive(false);
         image1.transform.GetChild(0).gameObject.SetActive(false);
         image2.transform.GetChild(0).gameObject.SetActive(false);
@@ -109,6 +111,7 @@ public class CanvasController : MonoBehaviour
             image2.transform.GetChild(0).gameObject.SetActive(true);
             Debug.Log("destroyed");
             bar2 = true;
+
         }
     }
     void UpdateSlider()
