@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private bool _isGrounded;
     private LayerMask _groundLayerMask;
     public float vertical;
+    private bool facingRight;
     private void Awake()
     {
         _defaultPlayerActions = new DefaultInputActions();
@@ -67,6 +68,15 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = new Vector3(inputVector.x, 0f);
         float moveDistance = _movementSpeed * Time.deltaTime;
         transform.position += moveDir * moveDistance;
+
+        if (inputVector.x > 0 && facingRight)
+        {
+            FlipFace();
+        }
+        else if (inputVector.x < 0 && !facingRight)
+        {
+            FlipFace();
+        }
     }
     public bool IsGrounded()
     {
@@ -98,11 +108,11 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void OnTriggerExit2D(Collider2D collision)
+    void FlipFace()
     {
-        if (collision.transform.name == "LadderVisual")
-        {
-            Debug.Log("AAAAAAAAAAAAA");
-        }
+        facingRight = !facingRight;
+        Vector3 tempLocalScale = transform.localScale;
+        tempLocalScale.x *= -1;
+        transform.localScale = tempLocalScale;
     }
 }
