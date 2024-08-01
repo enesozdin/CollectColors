@@ -11,7 +11,8 @@ public class Spawner : MonoBehaviour
     public GameObject barrel;
     public GameObject barrel1;
     public GameObject barrel2;
-    int spawnBarrelCount = 10;
+    public GameObject Player;
+    int spawnBarrelCount = 20;
 
     private void Awake()
     {
@@ -53,6 +54,8 @@ public class Spawner : MonoBehaviour
         barrel1.transform.SetPositionAndRotation(rand1+new Vector2(1,0), Quaternion.identity);
         Vector2 rand2 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
         barrel2.transform.SetPositionAndRotation(rand2+new Vector2(2,0), Quaternion.identity);
+        Vector2 rand3 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        Player.transform.SetPositionAndRotation(rand3, Quaternion.identity);
 
     }
     public Vector2 randSpawn()

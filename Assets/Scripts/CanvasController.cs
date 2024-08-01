@@ -1,11 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,13 +18,15 @@ public class CanvasController : MonoBehaviour
     Color lastcolor;
 
     [SerializeField] Text text;
+    [SerializeField] Image fillImage;
     public Image image;
     public Image image1;
     public Image image2;
 
     public CameraScript cameraShake;
 
-    private float totalTime = 10.0f;
+    private float totalTime = 12.0f;
+    private float updateTime = 3f;
     public float time;
     // Start is called before the first frame update
     private void Awake()
@@ -67,15 +64,17 @@ public class CanvasController : MonoBehaviour
         UpdateSlider();
         if (time > 0)
         {
+            fillImage.color = Color.green;
             if (time < 3)
             {
-                //cameraShake.TriggerShake(+0.1f);
                 cameraShake.IsAllowShake(true);
+                fillImage.color=Color.red;
+                //slider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color;
             }
 
-            if (time > 10.0f)
+            if (time > totalTime)
             {
-                time = 10.0f;
+                time = totalTime;
             }
             time -= Time.deltaTime;
             UpdateSlider();
@@ -114,7 +113,7 @@ public class CanvasController : MonoBehaviour
     }
     public void AddTime()
     {
-        time += 3.0f;
+        time += updateTime;
         UpdateSlider();
     }
 }
