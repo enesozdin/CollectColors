@@ -7,12 +7,13 @@ public class Spawner : MonoBehaviour
 {
     public static Spawner Instance;
 
-    [SerializeField] GameObject prefabBarrel;
-    public GameObject barrel;
-    public GameObject barrel1;
-    public GameObject barrel2;
+    [SerializeField] GameObject prefabPoint;
+    public GameObject point;
+    public GameObject point1;
+    public GameObject point2;
+    public GameObject point3;
     public GameObject Player;
-    int spawnBarrelCount = 20;
+    int spawnPointCount = 20;
 
     private void Awake()
     {
@@ -26,9 +27,9 @@ public class Spawner : MonoBehaviour
     {
 
         SelectPlatform();
-        for (int i = 0; i < spawnBarrelCount; i++)
+        for (int i = 0; i < spawnPointCount; i++)
         {
-            Instantiate(barrel, randSpawn() + new Vector2(2, 0), Quaternion.identity);
+            Instantiate(point, randSpawn() + new Vector2(2, 0), Quaternion.identity);
         }
     }
 
@@ -49,13 +50,16 @@ public class Spawner : MonoBehaviour
         List<Vector2> spawnPositions = new List<Vector2>() { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7 };
 
         Vector2 rand = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        barrel.transform.SetPositionAndRotation(rand, Quaternion.identity);
+        point.transform.SetPositionAndRotation(rand, Quaternion.identity);
         Vector2 rand1 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        barrel1.transform.SetPositionAndRotation(rand1+new Vector2(1,0), Quaternion.identity);
+        point1.transform.SetPositionAndRotation(rand1+new Vector2(1,0), Quaternion.identity);
         Vector2 rand2 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        barrel2.transform.SetPositionAndRotation(rand2+new Vector2(2,0), Quaternion.identity);
+        point2.transform.SetPositionAndRotation(rand2+new Vector2(2,0), Quaternion.identity);
         Vector2 rand3 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        Player.transform.SetPositionAndRotation(rand3, Quaternion.identity);
+        point3.transform.SetPositionAndRotation(rand3, Quaternion.identity);
+        Vector2 rand4 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        Player.transform.SetPositionAndRotation(rand4, Quaternion.identity);
+
 
     }
     public Vector2 randSpawn()
@@ -75,8 +79,8 @@ public class Spawner : MonoBehaviour
     }
     public void setBarrelColor()
     {
-        barrel.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image.color;
-        barrel1.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image1.color;
-        barrel2.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image2.color;
+        point.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image.color;
+        point1.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image1.color;
+        point2.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image2.color;
     }
 }

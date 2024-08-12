@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _movementSpeed;
     [SerializeField] float _jumpForce;
 
+
     private bool _isGrounded;
     private LayerMask _groundLayerMask;
     public float vertical;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        lastPosition = transform.position + new Vector3(0, 6);
+        lastPosition = transform.position + new Vector3(0, 16);
     }
     private void OnEnable()
     {
@@ -102,14 +103,14 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down, GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f, _groundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down, GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.02f, _groundLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)
         {
             rayColor = Color.green;
         }
         else { rayColor = Color.red; }
-        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.05f), rayColor);
+        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.02f), rayColor);
         return raycastHit.collider != null;
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -140,12 +141,12 @@ public class PlayerController : MonoBehaviour
     {
         if (!ghostSpawned)
         {
-            ghostInstance = Instantiate(ghostPrefab, lastPosition, Quaternion.identity);
+            //ghostInstance = Instantiate(ghostPrefab, lastPosition, Quaternion.identity);
             ghostSpawned = true;
         }
 
         // Update ghost's position to follow the player's last position
-        ghostInstance.GetComponent<GhostFollow>().SetTargetPosition(lastPosition);
+        ghostPrefab.GetComponent<GhostFollow>().SetTargetPosition(lastPosition);
 
         // Update lastPosition for the next frame
         lastPosition = transform.position;

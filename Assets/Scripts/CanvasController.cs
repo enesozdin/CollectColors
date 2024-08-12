@@ -87,22 +87,19 @@ public class CanvasController : MonoBehaviour
     }
     public void SameColor()
     {
-        if (Spawner.Instance.barrel.gameObject.IsDestroyed())
+        if (Spawner.Instance.point.gameObject.IsDestroyed())
         {
             image.transform.GetChild(0).gameObject.SetActive(true);
-            Debug.Log("destroyed");
             bar = true;
         }
-        if (Spawner.Instance.barrel1.gameObject.IsDestroyed())
+        if (Spawner.Instance.point1.gameObject.IsDestroyed())
         {
             image1.transform.GetChild(0).gameObject.SetActive(true);
-            Debug.Log("destroyed");
             bar1 = true;
         }
-        if (Spawner.Instance.barrel2.gameObject.IsDestroyed())
+        if (Spawner.Instance.point2.gameObject.IsDestroyed())
         {
             image2.transform.GetChild(0).gameObject.SetActive(true);
-            Debug.Log("destroyed");
             bar2 = true;
 
         }

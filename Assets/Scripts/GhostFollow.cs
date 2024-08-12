@@ -8,7 +8,10 @@ public class GhostFollow : MonoBehaviour
 {
     public float followSpeed;
     private Vector3 targetPosition;
-
+    SpriteRenderer spriteRenderer;
+    private void Start()
+    {
+    }
     private void Update()
     {
         if (targetPosition != Vector3.zero)
@@ -24,12 +27,17 @@ public class GhostFollow : MonoBehaviour
 
     private void MoveTowardsTarget()
     {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, followSpeed * Time.deltaTime);
+        if ((Time.timeSinceLevelLoad > 0.7f))
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, followSpeed * Time.deltaTime);
+        }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.name == "Capsule")
+        if (collision.transform.name == "PlayerVisual"&& Time.timeSinceLevelLoad>1.5f)
         {
+            
             SceneManager.LoadScene(2);
         }
     }

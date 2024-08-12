@@ -5,9 +5,9 @@ using Unity.VisualScripting;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
 
-public class Barrel : MonoBehaviour
+public class Point : MonoBehaviour
 {
-    public static Barrel Instance;
+    public static Point Instance;
     SpriteRenderer spriteRenderer;
     CanvasController canvasController;
     private void Awake()
@@ -23,9 +23,9 @@ public class Barrel : MonoBehaviour
         if (GetComponent<SpriteRenderer>().color == Color.white)
         {
             spriteRenderer.color = GameController.Instance.SetColor();
-            Spawner.Instance.barrel.GetComponent<SpriteRenderer>().color = Color.white;
-            Spawner.Instance.barrel1.GetComponent<SpriteRenderer>().color = Color.white;
-            Spawner.Instance.barrel2.GetComponent<SpriteRenderer>().color = Color.white;
+            Spawner.Instance.point.GetComponent<SpriteRenderer>().color = Color.white;
+            Spawner.Instance.point1.GetComponent<SpriteRenderer>().color = Color.white;
+            Spawner.Instance.point2.GetComponent<SpriteRenderer>().color = Color.white;
         }
         else
         {
@@ -43,7 +43,7 @@ public class Barrel : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.name == "Capsule")
+        if (collision.transform.name == "PlayerVisual")
         {
             Destroy(gameObject);
             if (GetComponent<SpriteRenderer>().material.color != Color.white)

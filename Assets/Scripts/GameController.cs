@@ -7,6 +7,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
 
+    [SerializeField] GameObject Player;
+
     private void Awake()
     {
         Instance = this;
@@ -27,5 +29,9 @@ public class GameController : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, colors.Length);
         Color randomColor = colors[randomIndex];
         return randomColor;
+    }
+    private void Blink()
+    {
+        //Player.
     }
 }

@@ -19,23 +19,22 @@ public class Ladder : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.transform.name == "Capsule")
+        if (collision.transform.name == "PlayerVisual")
         {
-            collision.GetComponent<Rigidbody2D>().gravityScale = 0;
+            collision.GetComponent<Rigidbody2D>().gravityScale = 1f;
             collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.name == "Capsule")
+        if (collision.transform.name == "PlayerVisual")
         {
             collision.GetComponent<Rigidbody2D>().gravityScale = 1;
-            Debug.Log("exit");
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.name == "Capsule")
+        if (collision.transform.name == "PlayerVisual")
         {
             //collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
