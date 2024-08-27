@@ -26,7 +26,7 @@ public class UntouchableEffect : MonoBehaviour
     void Update()
     {
         Debug.Log(Time.timeSinceLevelLoad);
-        if (Time.timeSinceLevelLoad < 1.5f)
+        if (Time.timeSinceLevelLoad < 1f)
         {
             spriteRenderer.material.color = Color.Lerp(baseColor, Color.white, Mathf.PingPong(Time.timeSinceLevelLoad * speed, 1));
         }

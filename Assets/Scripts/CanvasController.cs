@@ -25,7 +25,7 @@ public class CanvasController : MonoBehaviour
 
     public CameraScript cameraShake;
 
-    private float totalTime = 12.0f;
+    private float totalTime = 15.0f;
     private float updateTime = 3f;
     public float time;
     // Start is called before the first frame update
@@ -52,7 +52,7 @@ public class CanvasController : MonoBehaviour
     {
         if (bar && bar1 && bar2)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(3);
         }
 
     }

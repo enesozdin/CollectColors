@@ -18,24 +18,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         IsAllowShake(allow);
-
-        //if (shakeDuration > 0)
-        //{
-        //    transform.localPosition = originalPosition + (Random.insideUnitSphere * 0.1f) * shakeMagnitude;
-
-        //    shakeDuration -= Time.deltaTime;
-        //}
-        //else
-        //{
-        //    shakeDuration = 0f;
-        //    transform.localPosition = originalPosition;
-        //}
     }
-
-    //public void TriggerShake(float duration)
-    //{
-    //    shakeDuration = duration;
-    //}
     public void IsAllowShake(bool allow)
     {
         if (allow == true)
