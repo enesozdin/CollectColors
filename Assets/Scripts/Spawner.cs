@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
         SelectPlatform();
         for (int i = 0; i < spawnPointCount; i++)
         {
-            Instantiate(point, randSpawn() + new Vector2(2, 0), Quaternion.identity);
+            Instantiate(prefabPoint, SelectPlatform(), Quaternion.identity);
         }
     }
 
@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour
     void Update()
     {
     }
-    public void SelectPlatform()
+    public Vector2 SelectPlatform()
     {
         Vector2 randomSpawnPosition = new Vector2(UnityEngine.Random.Range(-7, 2.5f), UnityEngine.Random.Range(1, 3.5f));
         Vector2 randomSpawnPosition1 = new Vector2(UnityEngine.Random.Range(9, 20), UnityEngine.Random.Range(9, 11.5f));
@@ -50,41 +50,42 @@ public class Spawner : MonoBehaviour
         Vector2 randomSpawnPosition7 = new Vector2(UnityEngine.Random.Range(44.5f, 53), UnityEngine.Random.Range(9f, 11f));
         Vector2 randomSpawnPosition8 = new Vector2(UnityEngine.Random.Range(27.5f, 38), UnityEngine.Random.Range(1, 3));
         List<Vector2> spawnPositions = new List<Vector2>() { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7,randomSpawnPosition8 };
-
         Vector2 rand = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        point.transform.SetPositionAndRotation(rand, Quaternion.identity);
-        Vector2 rand1 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        point1.transform.SetPositionAndRotation(rand1+new Vector2(1,0), Quaternion.identity);
-        Vector2 rand2 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        point2.transform.SetPositionAndRotation(rand2+new Vector2(2,0), Quaternion.identity);
-        Vector2 rand3 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        point3.transform.SetPositionAndRotation(rand3, Quaternion.identity);
-        Vector2 rand4 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        Player.transform.SetPositionAndRotation(rand4, Quaternion.identity);
+
+        Vector2 prand = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        point.transform.SetPositionAndRotation(prand, Quaternion.identity);
+        Vector2 prand1 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        point1.transform.SetPositionAndRotation(prand1+new Vector2(1,0), Quaternion.identity);
+        Vector2 prand2 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        point2.transform.SetPositionAndRotation(prand2+new Vector2(2,0), Quaternion.identity);
+        Vector2 prand3 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        point3.transform.SetPositionAndRotation(prand3, Quaternion.identity);
+        Vector2 playerRand4 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+        Player.transform.SetPositionAndRotation(playerRand4, Quaternion.identity);
 
         if (point3.transform == Player.transform)
         {
             Vector2 rand5 = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
             point3.transform.SetPositionAndRotation(rand5, Quaternion.identity);
         }
-
-    }
-    public Vector2 randSpawn()
-    {
-        Vector2 randomSpawnPosition = new Vector2(UnityEngine.Random.Range(-7, 2.5f), UnityEngine.Random.Range(1, 3.5f));
-        Vector2 randomSpawnPosition1 = new Vector2(UnityEngine.Random.Range(9, 20), UnityEngine.Random.Range(9, 11.5f));
-        Vector2 randomSpawnPosition2 = new Vector2(UnityEngine.Random.Range(9, 22), UnityEngine.Random.Range(17.5f, 20));
-        Vector2 randomSpawnPosition3 = new Vector2(UnityEngine.Random.Range(-9, 5), UnityEngine.Random.Range(25.5f, 28));
-        Vector2 randomSpawnPosition4 = new Vector2(UnityEngine.Random.Range(10, 24), UnityEngine.Random.Range(25.5f, 28));
-        Vector2 randomSpawnPosition5 = new Vector2(UnityEngine.Random.Range(26f, 40f), UnityEngine.Random.Range(17.5f, 20));
-        Vector2 randomSpawnPosition6 = new Vector2(UnityEngine.Random.Range(38, 53), UnityEngine.Random.Range(25f, 27f));
-        Vector2 randomSpawnPosition7 = new Vector2(UnityEngine.Random.Range(44.5f, 53), UnityEngine.Random.Range(9f, 11f));
-        Vector2 randomSpawnPosition8 = new Vector2(UnityEngine.Random.Range(27.5f, 38), UnityEngine.Random.Range(1, 3));
-        List<Vector2> spawnPositions = new List<Vector2>() { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7,randomSpawnPosition8 };
-        Vector2 rand = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
-        //Vector2[] spawnPositions = { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7 };
         return rand;
     }
+    //public Vector2 randSpawn()
+    //{
+    //    Vector2 randomSpawnPosition = new Vector2(UnityEngine.Random.Range(-7, 2.5f), UnityEngine.Random.Range(1, 3.5f));
+    //    Vector2 randomSpawnPosition1 = new Vector2(UnityEngine.Random.Range(9, 20), UnityEngine.Random.Range(9, 11.5f));
+    //    Vector2 randomSpawnPosition2 = new Vector2(UnityEngine.Random.Range(9, 22), UnityEngine.Random.Range(17.5f, 20));
+    //    Vector2 randomSpawnPosition3 = new Vector2(UnityEngine.Random.Range(-9, 5), UnityEngine.Random.Range(25.5f, 28));
+    //    Vector2 randomSpawnPosition4 = new Vector2(UnityEngine.Random.Range(10, 24), UnityEngine.Random.Range(25.5f, 28));
+    //    Vector2 randomSpawnPosition5 = new Vector2(UnityEngine.Random.Range(26f, 40f), UnityEngine.Random.Range(17.5f, 20));
+    //    Vector2 randomSpawnPosition6 = new Vector2(UnityEngine.Random.Range(38, 53), UnityEngine.Random.Range(25f, 27f));
+    //    Vector2 randomSpawnPosition7 = new Vector2(UnityEngine.Random.Range(44.5f, 53), UnityEngine.Random.Range(9f, 11f));
+    //    Vector2 randomSpawnPosition8 = new Vector2(UnityEngine.Random.Range(27.5f, 38), UnityEngine.Random.Range(1, 3));
+    //    List<Vector2> spawnPositions = new List<Vector2>() { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7,randomSpawnPosition8 };
+    //    Vector2 rand = spawnPositions[UnityEngine.Random.Range(0, spawnPositions.Count)];
+    //    //Vector2[] spawnPositions = { randomSpawnPosition, randomSpawnPosition1, randomSpawnPosition2, randomSpawnPosition3, randomSpawnPosition4, randomSpawnPosition5, randomSpawnPosition6, randomSpawnPosition7 };
+    //    return rand;
+    //}
     public void setBarrelColor()
     {
         point.GetComponent<SpriteRenderer>().material.color = CanvasController.Instance.image.color;

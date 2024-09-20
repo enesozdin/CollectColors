@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
     private GameObject ghostInstance;
     private bool ghostSpawned = false;
     private Vector2 lastPosition;
+
+
+    Vector2 stickL;
+    Gamepad gamepad;
     private void Awake()
     {
         _defaultPlayerActions = new DefaultInputActions();
@@ -41,6 +45,8 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         lastPosition = transform.position + new Vector3(0, 16);
+        gamepad = Gamepad.current;
+        
     }
     private void OnEnable()
     {
@@ -60,12 +66,10 @@ public class PlayerController : MonoBehaviour
     }
     private void OnJump(InputAction.CallbackContext context)
     {
-
         if (IsGrounded())
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
-
     }
     private void FixedUpdate()
     {
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour
         UpdateGhost();
         animator.SetBool("JumpAnimation", !IsGrounded());
         Vector2 lookDir = _lookAction.ReadValue<Vector2>();
+        stickL = gamepad.leftStick.ReadValue();
     }
     private void Movement()
     {
@@ -115,14 +120,15 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+
         if (collision.transform.name == "LadderVisual")
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) || stickL.y > 0)
             {
                 Vector3 vec2 = new Vector3(0f, _movementSpeed);
                 transform.position += vec2 * Time.deltaTime;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKey(KeyCode.S) || stickL.y < 0)
             {
                 Vector3 vec2 = new Vector3(0f, -_movementSpeed);
                 transform.position += vec2 * Time.deltaTime;
