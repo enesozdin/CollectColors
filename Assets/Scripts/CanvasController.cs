@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CanvasController : MonoBehaviour
+public class GameController : MonoBehaviour
 {
-    public static CanvasController Instance;
+    public static GameController Instance;
     private int counter;
     private int point;
     public Slider slider;
@@ -37,9 +37,9 @@ public class CanvasController : MonoBehaviour
     }
     void Start()
     {
-        image.color = GameController.Instance.SetColor();
-        image1.color = GameController.Instance.SetColor();
-        image2.color = GameController.Instance.SetColor();
+        image.color = SetColor();
+        image1.color = SetColor();
+        image2.color = SetColor();
         Spawner.Instance.setBarrelColor();
         image.transform.GetChild(0).gameObject.SetActive(false);
         image1.transform.GetChild(0).gameObject.SetActive(false);
@@ -69,7 +69,6 @@ public class CanvasController : MonoBehaviour
             {
                 cameraShake.IsAllowShake(true);
                 fillImage.color=Color.red;
-                //slider.transform.GetChild(1).GetChild(0).GetComponent<Image>().color;
             }
 
             if (time > totalTime)
@@ -112,5 +111,13 @@ public class CanvasController : MonoBehaviour
     {
         time += updateTime;
         UpdateSlider();
+    }
+
+    public Color SetColor()
+    {
+        Color[] colors = { Color.red, Color.green, Color.blue };
+        int randomIndex = UnityEngine.Random.Range(0, colors.Length);
+        Color randomColor = colors[randomIndex];
+        return randomColor;
     }
 }

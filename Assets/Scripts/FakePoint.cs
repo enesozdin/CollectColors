@@ -23,7 +23,6 @@ public class FakePoint : MonoBehaviour
     {
         if (collision.transform.name == "PlayerVisual")
         {
-            Destroy(gameObject);
             SceneManager.LoadScene(2);
         }
     }

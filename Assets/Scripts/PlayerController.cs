@@ -10,65 +10,64 @@ using UnityEngine.InputSystem;
 //[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
+    private Rigidbody2D rigidbody;
 
-    private DefaultInputActions _defaultPlayerActions;
-    private InputAction _moveAction;
-    private InputAction _lookAction;
+    private DefaultInputActions defaultPlayerActions;
+    private InputAction moveAction;
+    private InputAction lookAction;
 
-    [SerializeField] float _movementSpeed;
-    [SerializeField] float _jumpForce;
+    [SerializeField] float movementSpeed=10f;
+    [SerializeField] float jumpForce=5f;
 
 
-    private bool _isGrounded;
-    private LayerMask _groundLayerMask;
-    public float vertical;
+    private bool isGrounded;
+    private LayerMask groundLayerMask;
     private bool facingRight;
     Animator animator;
 
     public GameObject ghostPrefab;
     private GameObject ghostInstance;
     private bool ghostSpawned = false;
-    private Vector2 lastPosition;
+    private Vector2 ghostLastPosition;
 
 
     Vector2 stickL;
     Gamepad gamepad;
     private void Awake()
     {
-        _defaultPlayerActions = new DefaultInputActions();
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _groundLayerMask = LayerMask.GetMask("Ground");
+        defaultPlayerActions = new DefaultInputActions();
+        rigidbody = GetComponent<Rigidbody2D>();
+        groundLayerMask = LayerMask.GetMask("Ground");
     }
     private void Start()
     {
         animator = GetComponent<Animator>();
 
-        lastPosition = transform.position + new Vector3(0, 16);
+        ghostLastPosition = transform.position + new Vector3(0, 16);
         gamepad = Gamepad.current;
         
     }
     private void OnEnable()
     {
-        _moveAction = _defaultPlayerActions.Player.Move;
-        _moveAction.Enable();
-        _lookAction = _defaultPlayerActions.Player.Look;
-        _lookAction.Enable();
-        _defaultPlayerActions.Player.Jump.performed += OnJump;
-        _defaultPlayerActions.Player.Jump.Enable();
+        moveAction = defaultPlayerActions.Player.Move;
+        moveAction.Enable();
+        lookAction = defaultPlayerActions.Player.Look;
+        lookAction.Enable();
+        defaultPlayerActions.Player.Jump.performed += OnJump;
+        defaultPlayerActions.Player.Jump.Enable();
     }
     private void OnDisable()
     {
-        _moveAction.Disable();
-        _lookAction.Disable();
-        _defaultPlayerActions.Player.Jump.performed -= OnJump;
-        _defaultPlayerActions.Player.Jump.Disable();
+        moveAction.Disable();
+        lookAction.Disable();
+        defaultPlayerActions.Player.Jump.performed -= OnJump;
+        defaultPlayerActions.Player.Jump.Disable();
     }
     private void OnJump(InputAction.CallbackContext context)
     {
         if (IsGrounded())
         {
-            _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
     private void FixedUpdate()
@@ -77,16 +76,21 @@ public class PlayerController : MonoBehaviour
         Movement();
         UpdateGhost();
         animator.SetBool("JumpAnimation", !IsGrounded());
-        Vector2 lookDir = _lookAction.ReadValue<Vector2>();
-        stickL = gamepad.leftStick.ReadValue();
+        Vector2 lookDir = lookAction.ReadValue<Vector2>();
+        if ((gamepad.enabled))
+        {
+            stickL = gamepad.leftStick.ReadValue();
+        }
+        
     }
     private void Movement()
     {
-        Vector2 inputVector = _moveAction.ReadValue<Vector2>();
-        inputVector = inputVector.normalized;
-        Vector3 moveDir = new Vector3(inputVector.x, 0f);
-        float moveDistance = _movementSpeed * Time.deltaTime;
-        transform.position += moveDir * moveDistance;
+        Vector2 inputVector = moveAction.ReadValue<Vector2>();
+        Debug.Log(inputVector);
+        //inputVector = inputVector.normalized;
+        Vector2 moveDir = new Vector2(inputVector.x, 0f);
+        float moveDistance = movementSpeed * Time.deltaTime;
+        transform.position += (Vector3)moveDir * moveDistance;
 
         if (inputVector.x > 0 && facingRight)
         {
@@ -108,14 +112,14 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down, GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.02f, _groundLayerMask);
+        RaycastHit2D raycastHit = Physics2D.Raycast(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down, GetComponent<CapsuleCollider2D>().bounds.extents.y, groundLayerMask);
         Color rayColor;
         if (raycastHit.collider != null)
         {
             rayColor = Color.green;
         }
         else { rayColor = Color.red; }
-        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y + 0.02f), rayColor);
+        Debug.DrawRay(GetComponent<CapsuleCollider2D>().bounds.center, Vector2.down * (GetComponent<CapsuleCollider2D>().bounds.extents.y), rayColor);
         return raycastHit.collider != null;
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -125,12 +129,12 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.W) || stickL.y > 0)
             {
-                Vector3 vec2 = new Vector3(0f, _movementSpeed);
+                Vector3 vec2 = new Vector3(0f, movementSpeed);
                 transform.position += vec2 * Time.deltaTime;
             }
             if (Input.GetKey(KeyCode.S) || stickL.y < 0)
             {
-                Vector3 vec2 = new Vector3(0f, -_movementSpeed);
+                Vector3 vec2 = new Vector3(0f, -movementSpeed);
                 transform.position += vec2 * Time.deltaTime;
             }
         }
@@ -152,9 +156,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // Update ghost's position to follow the player's last position
-        ghostPrefab.GetComponent<GhostFollow>().SetTargetPosition(lastPosition);
+        ghostPrefab.GetComponent<GhostFollow>().SetTargetPosition(ghostLastPosition);
 
         // Update lastPosition for the next frame
-        lastPosition = transform.position;
+        ghostLastPosition = transform.position;
     }
 }

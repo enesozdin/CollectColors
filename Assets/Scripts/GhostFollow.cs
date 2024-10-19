@@ -27,7 +27,7 @@ public class GhostFollow : MonoBehaviour
 
     private void MoveTowardsTarget()
     {
-        if ((Time.timeSinceLevelLoad > 0.7f))
+        if ((Time.timeSinceLevelLoad > 0.75f))
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, followSpeed * Time.deltaTime);
         }
@@ -37,7 +37,6 @@ public class GhostFollow : MonoBehaviour
     {
         if (collision.transform.name == "PlayerVisual"&& Time.timeSinceLevelLoad>1.5f)
         {
-            
             SceneManager.LoadScene(2);
         }
     }

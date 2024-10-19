@@ -6,22 +6,11 @@ using UnityEngine;
 public class Ladder : MonoBehaviour
 {
     [SerializeField] Transform Player;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.transform.name == "PlayerVisual")
         {
-            collision.GetComponent<Rigidbody2D>().gravityScale = 1f;
+            collision.GetComponent<Rigidbody2D>().gravityScale = 0f;
             collision.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }

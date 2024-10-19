@@ -24,6 +24,7 @@ public class DeadZone : MonoBehaviour
             Debug.Log(collision.transform.name);
             Destroy(collision.gameObject);
             SceneManager.LoadScene(2);
+            Debug.Log("Deadzone!!!");
         }
     }
 }
