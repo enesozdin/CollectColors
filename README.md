@@ -4,6 +4,9 @@
   * Character Animation
   * Controller Support
     
-![image](https://github.com/user-attachments/assets/c088188b-20d6-477a-95e3-26b761ca4d25)
+![Main Menu](https://github.com/user-attachments/assets/a49ce73c-8c60-4d18-a85b-9ff373b5221d)
 ---
-![image](https://github.com/user-attachments/assets/f69ceaa4-6924-469e-8a0e-96f7e790db1f)
+![Game](https://github.com/user-attachments/assets/f69ceaa4-6924-469e-8a0e-96f7e790db1f)
+
+- **Known Problems:**
+  * The colors spawn randomly in predefined areas. This is why they can overlap, including the blinking color.
