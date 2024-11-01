@@ -446,7 +446,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: In this game have to collect true colors. You have 3 colors on your screen's
-    top-left, they are your true colors. You have to find this colors but be carefull
+    top-left, they are your true colors. You have to find these colors but be carefull
     if you collect blinky one or catching by from ghost your game is over.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

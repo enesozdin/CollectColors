@@ -80,8 +80,7 @@ public class PlayerController : MonoBehaviour
         if ((gamepad.enabled))
         {
             stickL = gamepad.leftStick.ReadValue();
-        }
-        
+        }        
     }
     private void Movement()
     {
